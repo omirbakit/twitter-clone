@@ -1,61 +1,64 @@
 <div class="container py-2 rounded-pill">
   <div class="row">
     <aside class="col side-navbar">
-      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-2 px-3" do %>
+      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-3 px-3" do %>
         <div class="px-2 py-2 rounded-circle">
           <%= image_tag "twitter.png", width: "32" %>
         </div>
       <% end %>
 
-      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-2" do %>
+      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-3" do %>
         <div class="px-4 py-2 rounded-pill">
           <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "home.png", width: "32" %></span>
           Home
         </div>
       <% end %>
 
-      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-2" do %>
+      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-3" do %>
         <div class="px-4 py-2 rounded-pill">
-          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "home.png", width: "32" %></span>
+          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "hashtag.png", width: "32" %></span>
           Explore
         </div>
       <% end %>
 
-      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-2" do %>
+      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-3" do %>
         <div class="px-4 py-2 rounded-pill">
-          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "home.png", width: "32" %></span>
+          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "notifications.png", width: "32" %></span>
           Notifications
         </div>
       <% end %>
 
-      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-2" do %>
+      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-3" do %>
         <div class="px-4 py-2 rounded-pill">
-          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "home.png", width: "32" %></span>
+          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "messages.png", width: "32" %></span>
           Messages
         </div>
       <% end %>
 
-      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-2" do %>
+      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-3" do %>
         <div class="px-4 py-2 rounded-pill">
-          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "home.png", width: "32" %></span>
+          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "bookmark-white.png", width: "32" %></span>
           Bookmarks
         </div>
       <% end %>
 
-      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-2" do %>
+      <%= link_to root_path, class: "d-flex align-items-center fs-5 mb-4" do %>
         <div class="px-4 py-2 rounded-pill">
-          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "home.png", width: "32" %></span>
+          <span class="me-4 position-relative" style="bottom: 3px;"><%= image_tag "profile.png", width: "32" %></span>
           Profile
         </div>
       <% end %>
 
-      <div class="d-flex align-items-center fs-5 mb-2 px-4">
-          <%= button_tag "Tweet", class: "btn btn-primary btn-lg rounded-pill" %>
+      <div class="d-flex align-items-center fs-4 mb-3 px-4">
+          <%= button_tag "Tweet", class: "btn btn-lg btn-twitter w-100 rounded-pill" %>
       </div>
 
-      <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete}, class: "btn btn-primary btn-lg" %>
+      <div class="d-flex align-items-center fs-6 px-4">
+        <%= link_to "Log out", destroy_user_session_path, data: { "turbo-method": :delete}, class: "twitter-link" %>
+      </div>
+
     </aside>
-    <div class="col">
+    <div class="col-7">
       <%= form_with model: Tweet.new, url: tweets_path, local: true do |f|%>
         <%= f.text_field :body %>
         <%= f.submit %>
