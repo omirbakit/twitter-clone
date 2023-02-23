@@ -8,6 +8,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "navbar", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "_forms", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "_buttons", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "_colors", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "_utilities", "data-turbo-track": "reload" %>
@@ -18,6 +19,16 @@
     <% if flash.any? %>
       <%= render "shared/flashes"  %>
     <% end %>
-    <%= yield %>
+    <% if user_signed_in? %>
+      <div class="container py-2">
+        <div class="row">
+          <%= render "shared/sidebar" %>
+          <%= yield %>
+        </div>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
+    
   </body>
 </html>
