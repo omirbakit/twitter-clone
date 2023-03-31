@@ -8,4 +8,31 @@
     background-color: rgb(238, 235, 235);
     cursor: pointer;
   }
+
+  .action-links {
+    a {
+      span {
+        position: relative;
+        top: 2px;
+      }
+    }
+
+    .views, .replies, .bookmark {
+      &:hover {
+        color: #499be9 !important;
+      }
+    }
+
+    .retweets {
+      &:hover {
+        color: #6cf350 !important;
+      } 
+    }
+
+    .likes {
+      &:hover {
+        color: #f33f3f !important;
+      }
+    }
+  }
 }
