@@ -22,7 +22,7 @@ RSpec.describe TweetPresenter, type: :presenter do
       it "displays how many hours have past" do
         tweet = create(:tweet)
         tweet.update! created_at: 2.days.ago
-        expect(TweetPresenter.new(tweet).created_at).to eq("Mar 25")
+        expect(TweetPresenter.new(tweet).created_at).to eq("Apr 2")
       end
     end
   end
