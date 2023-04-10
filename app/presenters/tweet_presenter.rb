@@ -28,7 +28,7 @@ class TweetPresenter
     end
   end
 
-  def turbo_data_method
+  def turbo_like_data_method
     if tweet_liked_by_current_user?
       "delete"
     else
@@ -44,10 +44,47 @@ class TweetPresenter
     end
   end
 
+  def bookmark_tweet_url
+    if tweet_bookmarked_by_current_user?
+      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet))
+    else
+      tweet_bookmarks_path(tweet)
+    end
+  end
+
+  def turbo_bookmark_data_method
+    if tweet_bookmarked_by_current_user?
+      "delete"
+    else
+      "post"
+    end
+  end
+
+  def bookmark_image
+    if tweet_bookmarked_by_current_user?
+      "bookmark-filled.png"
+    else
+      "bookmark-unfilled.png"
+    end
+  end
+
+  def bookmark_text
+    if tweet_bookmarked_by_current_user?
+      "Bookmarked"
+    else
+      "Bookmark"
+    end
+  end
+
   private
 
   def tweet_liked_by_current_user
     @tweet_liked_by_current_user ||= tweet.liked_users.include?(current_user)
   end
   alias_method :tweet_liked_by_current_user?, :tweet_liked_by_current_user
+
+  def tweet_bookmarked_by_current_user
+    @tweet_bookmarked_by_current_user ||= tweet.bookmarked_users.include?(current_user)
+  end
+  alias_method :tweet_bookmarked_by_current_user?, :tweet_bookmarked_by_current_user
 end
