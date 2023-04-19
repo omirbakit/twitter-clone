@@ -44,11 +44,11 @@ class TweetPresenter
     end
   end
 
-  def bookmark_tweet_url
+  def bookmark_tweet_url(source: "dashboard/index")
     if tweet_bookmarked_by_current_user?
-      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet))
+      tweet_bookmark_path(tweet, current_user.bookmarks.find_by(tweet: tweet), source: source)
     else
-      tweet_bookmarks_path(tweet)
+      tweet_bookmarks_path(tweet, source: source)
     end
   end
 
