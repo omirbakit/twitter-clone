@@ -17,17 +17,17 @@
       <% end %>
     </div>
     <div>
-      <%= link_to tweet_presenter.retweet_tweet_url, data: { "turbo-method": tweet_presenter.turbo_retweet_data_method }, class: "text-decoration-none text-black retweets" do %>
+      <%= link_to tweet_presenter.retweet_tweet_url(source: "tweet_show"), data: { "turbo-method": tweet_presenter.turbo_retweet_data_method }, class: "text-decoration-none text-black retweets" do %>
         <%= image_tag tweet_presenter.retweet_image, size: "24x24", class: "me-1" %>
       <% end %>
     </div>
     <div>
-      <%= link_to tweet_presenter.like_tweet_url, data: { "turbo-method": tweet_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
+      <%= link_to tweet_presenter.like_tweet_url(source: "tweet_show"), data: { "turbo-method": tweet_presenter.turbo_like_data_method }, class: "text-decoration-none text-black likes" do %>
         <%= image_tag tweet_presenter.like_heart_image, size: "24x24", class: "me-1" %>
       <% end %>
     </div>
     <div>
-      <%= link_to tweet_presenter.bookmark_tweet_url(source: "tweets/show"), data: { "turbo-method": tweet_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
+      <%= link_to tweet_presenter.bookmark_tweet_url(source: "tweet_show"), data: { "turbo-method": tweet_presenter.turbo_bookmark_data_method }, class: "text-decoration-none text-black bookmark" do %>
         <%= image_tag tweet_presenter.bookmark_image, size: "24x24", class: "me-1" %>
       <% end %>
     </div>

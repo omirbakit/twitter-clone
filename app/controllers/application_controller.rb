@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
   def redirect_to_username_form
     redirect_to new_username_path
   end
+
+  def previous_path
+    @previous_path ||= Rails.application.routes.recognize_path(request.referrer)
+  end
 end
