@@ -16,11 +16,8 @@
           <%= image_tag "user.png", class: "rounded-circle", size: "150x150" %>
         <% end %>
       </div>
-      <div>
-        <%= link_to "Follow", "#", class: "btn btn-outline-twitter rounded-pill" %>
-      </div>
+      <%= render "follow_button", user: @user, current_user: current_user %>
     </div>
-
     <%= render "profile/profile_section", user: @user %>
   </div>
 </div>
