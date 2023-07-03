@@ -12,6 +12,9 @@ class ProfileController < ApplicationController
   def update
     @user = current_user
     @user.update(user_params[:password].blank? ? user_params.except(:password) : user_params)
+    @tweet_presenters = @user.tweets.map do |tweet|
+      TweetPresenter.new(tweet: tweet, current_user: @user)
+    end
     respond_to do |format|
       format.html { redirect_to profile_path }
       format.turbo_stream
@@ -21,6 +24,6 @@ class ProfileController < ApplicationController
   private
 
   def user_params
-    params.required(:user).permit(:username, :desplay_name, :email, :password, :location, :bio, :profile_url)
+    params.required(:user).permit(:username, :desplay_name, :email, :password, :location, :bio, :avatar, :profile_url)
   end
 end
