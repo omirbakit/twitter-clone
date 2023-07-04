@@ -2,6 +2,7 @@ aside.side-navbar {
   a {
     text-decoration: none;
     color: black;
+
     div {
       -moz-transition: all .1s ease-in;
       -o-transition: all .1s ease-in;
@@ -9,6 +10,14 @@ aside.side-navbar {
       transition: all .1s ease-in;
 
       &:hover {
+        background-color: rgb(238, 235, 235);
+      }
+    }
+
+    &.active {
+      font-weight: 700;
+
+      div {
         background-color: rgb(238, 235, 235);
       }
     }
