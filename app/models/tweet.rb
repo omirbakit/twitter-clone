@@ -10,6 +10,7 @@ class Tweet < ApplicationRecord
   has_many :retweeted_users, through: :retweets, source: :user
   has_many :views, dependent: :destroy
   has_many :viewed_users, through: :views, source: :user
+  has_and_belongs_to_many :hashtags
   belongs_to :parent_tweet,
              inverse_of: :reply_tweets, 
              foreign_key: :parent_tweet_id, 
