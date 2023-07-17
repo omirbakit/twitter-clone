@@ -9,7 +9,7 @@
         <span class="text-muted">
           @<%= tweet_presenter.username %> * <%= tweet_presenter.created_at %></span>
       </p>
-      <p><%= tweet_presenter.body %></p>
+      <%= tweet_presenter.body_html.html_safe %>
 
       <div class="d-flex justify-content-between align-items-center action-links">
         <div> 
