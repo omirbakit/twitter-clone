@@ -9,7 +9,7 @@ class TweetPresenter
 
   attr_reader :tweet, :current_user
 
-  delegate :user, :likes_count, :retweets_count, :views_count, :reply_tweets_count, to: :tweet
+  delegate :user, :body, :likes_count, :retweets_count, :views_count, :reply_tweets_count, to: :tweet
   delegate :display_name, :username, to: :user
 
   def created_at
@@ -20,7 +20,7 @@ class TweetPresenter
     end
   end
 
-  def body_html
+  def body_html(p_class: "")
     texts = tweet.body.split(" ").map do |word|
       if word.include?("#")
         "<a class=\"twitter-link\">#{word}</a>"
@@ -28,7 +28,7 @@ class TweetPresenter
         word
       end
     end
-    "<p>#{texts.join(" ")}</p>"
+    "<p class=\"#{p_class}\">#{texts.join(" ")}</p>"
   end
 
   def avatar
