@@ -19,7 +19,7 @@
         <div class="flex-grow-1 ms-3">
           <div>
             <span class="fw-bold mr-3"><%= @new_message_thread_user.display_name %></span>
-            <span><%= @new_message_thread_user.username %></span>
+            <span class="text-muted">@<%= @new_message_thread_user.username %></span>
           </div>
         </div>
       </div>
@@ -27,5 +27,12 @@
   <% end %>
 </div>
 <div class="col-6">
-  <%= render "shared/hashtag_sidebar" %>
+  <div class="vh-100 position-relative">
+    <div class="position-absolute w-100 bottom-0">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Type your message">
+        <span class="input-group-text" id="basic-addon2"><%= image_tag "send.png", size: "17x17" %></span>
+      </div>
+    </div>
+  </div>
 </div>
