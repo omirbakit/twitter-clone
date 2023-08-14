@@ -26,7 +26,9 @@ Rails.application.routes.draw do
 
   resources :hashtags, only: [:show, :index], path: "/explore"
 
-  resources :message_threads, only: :index, path: "/messages"
+  resources :message_threads, only: :index, path: "/messages" do
+    resources :messages, only: :index
+  end
 
   resources :messages, only: :create
 end

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "messages" do %>
+	<%= render partial: "message_threads/messages", locals: { messages: @messages } %>
+<% end %>

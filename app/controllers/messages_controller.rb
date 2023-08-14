@@ -1,6 +1,15 @@
 class MessagesController < ApplicationController
 	before_action :authenticate_user!
 
+	def index
+		@message_thread = MessageThread.find(params[:message_thread_id])
+		@messages = @message_thread.messages
+
+		respond_to do |format|
+			format.turbo_stream			
+		end
+	end
+	
 	def create
 		user = User.find(params[:user_id])
 		user_message_thread_ids = MessageThreadsUser.where(user: user).pluck(:message_thread_id)
