@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
 	def index
 		@message_thread = MessageThread.find(params[:message_thread_id])
 		@messages = @message_thread.messages
+		@user = @messages.where.not(user: current_user).first.user
 
 		respond_to do |format|
 			format.turbo_stream			
@@ -21,11 +22,15 @@ class MessagesController < ApplicationController
 				message_thread = MessageThread.create
 				user.message_threads << message_thread
 				current_user.message_threads << message_thread
-				Message.create(message_params.merge(user: current_user, message_thread: message_thread))
 			end
 		else
 			message_thread = MessageThread.find(common_message_thread_ids.first)
-			Message.create(message_params.merge(user: current_user, message_thread: message_thread))
+		end
+
+		@message = Message.create(message_params.merge(user: current_user, message_thread: message_thread))
+
+		respond_to do |format|
+			format.turbo_stream
 		end
 	end
 	
