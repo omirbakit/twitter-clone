@@ -12,10 +12,24 @@ export default class extends Controller {
       messageThread.addEventListener('click', (e) => {
         e.preventDefault();
 
+        this.messageThreadTargets.forEach((messageThread) => {
+          messageThread.classList.remove('active');
+        })
+
+        messageThread.classList.add('active');
+
         fetch(`/messages/${messageThread.dataset.messageThreadId}/messages`, { headers: this.headers })
           .then(response => response.text())
           .then(html => Turbo.renderStreamMessage(html));
       });
     });
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    if (urlParams.get('user_id') !== null) {
+      this.element.querySelector(`[data-message-target-user-id="${urlParams.get('user_id')}"]`).click();
+      this.element.querySelector(`[data-message-target-user-id="${urlParams.get('user_id')}"]`).classList.add('active');
+    }
   }
 }
