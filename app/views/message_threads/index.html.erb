@@ -6,29 +6,18 @@
     <% end %>
   </div>
 
-  <% if @new_message_thread_user.present? %>
-    <div>
-      <div class="d-flex py-3 px-3">
-        <div class="flex-shrink-0">
-          <% if @new_message_thread_user.avatar.present? %>
-              <%= image_tag @new_message_thread_user.avatar, size: "48x48", class: "rounded-circle" %>
-            <% else %>
-              <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
-          <% end %>
-        </div>
-        <div class="flex-grow-1 ms-3">
-          <div>
-            <span class="fw-bold mr-3"><%= @new_message_thread_user.display_name %></span>
-            <span class="text-muted">@<%= @new_message_thread_user.username %></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
   <% @message_threads.each do |message_thread| %>
-    <% other_user = message_thread.users.where.not(id: current_user.id).first %>
-    <div data-messages-target="messageThread" data-message-thread-id="<%= message_thread.id %>" data-message-target-user-id="<%= other_user.id %>" class="message-thread d-flex py-3 px-3">
+    <% if message_thread.new_record? %>
+      <% other_user = @user %>
+    <% else %>
+      <% other_user = message_thread.users.where.not(id: current_user.id).first %>
+    <% end %>
+    <div 
+      data-messages-target="messageThread" 
+      data-message-thread-id="<%= message_thread.id %>" 
+      data-message-target-user-id="<%= other_user.id %>" 
+      class="message-thread <%= 'active' if message_thread.new_record? %> d-flex py-3 px-3"
+    >
       <div class="flex-shrink-0">
         <% if other_user.avatar.present? %>
             <%= image_tag other_user.avatar, size: "48x48", class: "rounded-circle" %>
