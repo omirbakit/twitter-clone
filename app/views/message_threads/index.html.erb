@@ -12,10 +12,10 @@
     <% else %>
       <% other_user = message_thread.users.where.not(id: current_user.id).first %>
     <% end %>
-    <div 
-      data-messages-target="messageThread" 
-      data-message-thread-id="<%= message_thread.id %>" 
-      data-message-target-user-id="<%= other_user.id %>" 
+    <div
+      data-messages-target="messageThread"
+      data-message-thread-id="<%= message_thread.id %>"
+      data-messages-target-user-id="<%= other_user.id %>"
       class="message-thread <%= 'active' if message_thread.new_record? %> d-flex py-3 px-3"
     >
       <div class="flex-shrink-0">
