@@ -16,6 +16,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:followers).through(:reverse_followings).source(:user) }
   it { should have_and_belong_to_many :message_threads }
   it { should have_many(:messages) }
+  it { should have_many(:notifications).dependent(:destroy) }
 
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 
