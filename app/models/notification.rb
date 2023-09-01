@@ -4,5 +4,9 @@ class Notification < ApplicationRecord
   belongs_to :tweet, optional: true
 
   VERBS = %w[followed-me liked-tweet mentioned-me].freeze
+
+  VERBS.each do |v|
+    define_method("#{v.gsub("-", "_")}?") { v == verb }
+  end
   validates :verb, presence: true, inclusion: { in: VERBS }
 end
