@@ -15,6 +15,15 @@ RSpec.describe "Followings", type: :request do
       end.to change { Following.count }.by(1)
       expect(response).to redirect_to user_path(user_2)
     end
+
+    it "creates a new following notification" do
+      expect do
+        post user_followings_path(user_1), params: {
+          following_user_id: user_2.id
+        }
+      end.to change { Notification.count }.by(1)
+      expect(response).to redirect_to user_path(user_2)
+    end
   end
 
   describe "DELETE destroy" do

@@ -7,10 +7,10 @@ class TweetPresenter
     @current_user = user
   end
 
-  attr_reader :tweet, :current_user
-
   delegate :user, :body, :likes_count, :retweets_count, :views_count, :reply_tweets_count, to: :tweet
   delegate :display_name, :username, to: :user
+
+  attr_reader :tweet, :current_user
 
   def created_at
     if (Time.zone.now - tweet.created_at) > 1.day
