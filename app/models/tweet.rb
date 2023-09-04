@@ -20,6 +20,8 @@ class Tweet < ApplicationRecord
              optional: true, 
              counter_cache: :reply_tweets_count
   has_many :reply_tweets, foreign_key: :parent_tweet_id, class_name: "Tweet"
+  has_many :mentions, dependent: :destroy
+  has_many :mentioned_users, through: :mentions
 
   before_save :parse_and_save_hashtags
   def parse_and_save_hashtags
@@ -30,5 +32,18 @@ class Tweet < ApplicationRecord
       hashtag = Hashtag.find_or_create_by(tag: tag.delete("#"))
       hashtags << Hashtag.find_or_create_by(tag: tag.delete("#"))
     end
+  end
+
+  after_save :parse_and_save_mentions
+  def parse_and_save_mentions
+    matches = body.scan(/(@\w+)/)
+    return if matches.empty?
+
+    matches.flatten.each do |mention|
+      mentioned_user = User.find_by(username: mention.delete("@"))
+      next if mentioned_user.blank?
+
+      mentions.find_or_create_by(mentioned_user: mentioned_user)
+    end    
   end
 end
