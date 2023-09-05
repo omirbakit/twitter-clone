@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :notification do
-    user { nil }
-    actor { nil }
-    tweet { nil }
-    verb { "MyString" }
+    user
+    actor { create(:user) }
+    tweet
+    verb { Notification::VERBS.sample }
   end
 end

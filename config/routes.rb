@@ -32,5 +32,5 @@ Rails.application.routes.draw do
 
   resources :messages, only: :create
 
-  resources :notifications, only: :index
+  resources :notifications, only: [:index, :destroy]
 end
