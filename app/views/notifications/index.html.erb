@@ -25,7 +25,15 @@
           <%= link_to "Show all", tweet_path(notification.tweet), class: "tweet-link mb-1" %>
         </div>
       <% elsif notification.mentioned_me? %>
-
+        <div>
+          <% if notification.actor.avatar.present? %>
+            <%= image_tag notification.actor.avatar, size: "48x48", class: "rounded-circle" %>
+          <% else %>
+            <%= image_tag "user.png", size: "48x48", class: "rounded-circle" %>
+          <% end %>
+          <p class="mb-1"><span class="fw-bold"><%= notification.actor.display_name %></span> mentioned you </p>
+          <%= link_to "Show @#{notification.actor.username}", user_path(notification.actor), class: "tweet-link mb-1" %>
+        </div>
       <% end %>
     <% end %>
   </div>

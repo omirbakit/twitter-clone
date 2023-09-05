@@ -43,7 +43,10 @@ class Tweet < ApplicationRecord
       mentioned_user = User.find_by(username: mention.delete("@"))
       next if mentioned_user.blank?
 
-      mentions.find_or_create_by(mentioned_user: mentioned_user)
+      next if mentions.exists?(mentioned_user: mentioned_user)
+
+      mentions.create(mentioned_user: mentioned_user)
+      Notification.create(user: mentioned_user, actor: user, verb: "mentioned-me")
     end    
   end
 end
