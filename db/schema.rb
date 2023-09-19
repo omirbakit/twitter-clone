@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_11_094753) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_102152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -164,6 +164,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_094753) do
     t.string "verb", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "actor_id", null: false
+    t.index ["actor_id"], name: "index_tweet_activities_on_actor_id"
     t.index ["tweet_id"], name: "index_tweet_activities_on_tweet_id"
     t.index ["user_id"], name: "index_tweet_activities_on_user_id"
   end
@@ -229,6 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_094753) do
   add_foreign_key "retweets", "users"
   add_foreign_key "tweet_activities", "tweets"
   add_foreign_key "tweet_activities", "users"
+  add_foreign_key "tweet_activities", "users", column: "actor_id"
   add_foreign_key "tweets", "tweets", column: "parent_tweet_id"
   add_foreign_key "tweets", "users"
   add_foreign_key "views", "tweets"

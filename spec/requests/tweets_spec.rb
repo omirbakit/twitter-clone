@@ -5,7 +5,6 @@ RSpec.describe "Tweets", type: :request do
     let(:user) { create(:user) }
     let(:tweet) { create(:tweet) }
 
-    before { sign_in user }
     before do
       sign_in user
       allow(ViewTweetJob).to receive(:perform_later)
@@ -35,9 +34,13 @@ RSpec.describe "Tweets", type: :request do
     end
 
     context "when logged in" do
-      it "creates a new tweet" do
-        user = create(:user)
+      let(:user) { create(:user) }
+      before do
         sign_in user
+        allow(TweetActivity::TweetedJob).to receive(:perform_later)
+      end
+
+      it "creates a new tweet" do
         expect do
           post tweets_path, params: {
             tweet: {
@@ -46,6 +49,16 @@ RSpec.describe "Tweets", type: :request do
           }
         end.to change { Tweet.count }.by(1)
         expect(response).to redirect_to(dashboard_path)
+      end
+
+      it "queues up TweetActivity::TweetedJob" do
+        post tweets_path, params: {
+          tweet: {
+            body: "New tweet body"
+          }
+        }
+        tweet = Tweet.last
+        expect(TweetActivity::TweetedJob).to have_received(:perform_later).with(actor: user, tweet: tweet)
       end
     end
   end
