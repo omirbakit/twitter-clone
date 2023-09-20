@@ -14,6 +14,12 @@ RSpec.describe "Likes", type: :request do
       expect(response).to have_http_status(:redirect)
     end
 
+    it "creates a new tweet activity" do
+      expect do
+        post tweet_likes_path(tweet)
+      end.to change { TweetActivity.count }.by(1)
+    end
+
     it "creates a new notification" do
       expect do
         post tweet_likes_path(tweet)
