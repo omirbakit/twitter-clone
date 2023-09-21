@@ -14,6 +14,7 @@ class LikesController < ApplicationController
   def destroy
     @like = tweet.likes.find(params[:id])
     @like.destroy
+    TweetActivity.where(user: tweet.user, actor: current_user, tweet: tweet, verb: "liked").destroy_all
     respond_to do |format|
       format.html { redirect_to dashboard_path }
       format.turbo_stream
