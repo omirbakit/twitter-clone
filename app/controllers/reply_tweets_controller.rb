@@ -3,7 +3,7 @@ class ReplyTweetsController < ApplicationController
 
   def create
     @reply_tweet = tweet.reply_tweets.create(tweet_params.merge(user: current_user))
-    TweetActivity.create(user: tweet.user, actor: current_user, tweet: tweet, verb: "replied")
+    TweetActivity.create(user: current_user, actor: current_user, tweet: tweet, verb: "replied")
 
     if @reply_tweet.save
       respond_to do |format|

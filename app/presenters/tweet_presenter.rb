@@ -13,16 +13,15 @@ class TweetPresenter
 
   attr_reader :tweet, :current_user, :tweet_activity
 
-  def render_tweet_activity?
-    return false unless tweet_activity
-    tweet_activity.verb.in?(TweetActivity::VERBS - %w[tweeted])
-  end
-
   def tweet_activity_html
     "hello world from tweet_activity_html for now"
     case tweet_activity.verb
     when "liked"
       "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px !important;\">#{tweet_activity.actor.display_name} liked</p>"
+    when "replied"
+      "<p class=\"fw-bold fs-6 text-muted mb-0\" style=\"margin-left: 5rem; font-size: 13px !important;\">#{tweet_activity.actor.display_name} replied to</p>"
+    else
+      ""  
     end
   end
 
