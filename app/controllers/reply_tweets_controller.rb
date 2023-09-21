@@ -2,9 +2,10 @@ class ReplyTweetsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @tweet = tweet.reply_tweets.create(tweet_params.merge(user: current_user))
+    @reply_tweet = tweet.reply_tweets.create(tweet_params.merge(user: current_user))
+    TweetActivity.create(user: tweet.user, actor: current_user, tweet: tweet, verb: "replied")
 
-    if @tweet.save
+    if @reply_tweet.save
       respond_to do |format|
         format.html { redirect_to dashboard_path }
         format.turbo_stream
