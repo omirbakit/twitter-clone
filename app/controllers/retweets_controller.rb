@@ -3,6 +3,7 @@ class RetweetsController < ApplicationController
 
   def create
     @retweet = current_user.retweets.create(tweet: tweet)
+    TweetActivity.create(user: current_user, actor: current_user, tweet: tweet, verb: "retweeted")
     respond_to do |format|
       format.html { redirect_to dashboard_path }
       format.turbo_stream
@@ -11,6 +12,7 @@ class RetweetsController < ApplicationController
 
   def destroy
     @retweet = tweet.retweets.find(params[:id])
+    TweetActivity.where(user: current_user, actor: current_user, tweet: tweet, verb: "retweeted").destroy_all
     @retweet.destroy
     respond_to do |format|
       format.html { redirect_to dashboard_path }
