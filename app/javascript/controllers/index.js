@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import DashboardTweetsController from "./dashboard_tweets_controller"
+application.register("dashboard-tweets", DashboardTweetsController)
+
 import HashtagController from "./hashtag_controller"
 application.register("hashtag", HashtagController)
 

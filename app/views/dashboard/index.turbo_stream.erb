@@ -1,0 +1,3 @@
+<%= turbo_stream.append "tweets" do %>
+  <%= render partial: "tweets/tweet", collection: @tweet_activities_data[:tweet_activities], as: :tweet_presenter  %>
+<% end %>
