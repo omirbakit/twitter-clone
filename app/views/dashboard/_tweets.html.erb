@@ -1,0 +1,11 @@
+  <div 
+    data-controller="dashboard-tweets"
+    data-next-page="<%= tweet_activities_data[:next_page] %>"
+    data-last-page="<%= tweet_activities_data[:last_page] %>"
+  >
+    <%= render partial: "tweets/tweet", collection: tweet_activities_data[:tweet_activities], as: :tweet_presenter %>
+  </div>
+
+  <script>
+    console.log('new partial rendered');
+  </script>
