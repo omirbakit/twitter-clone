@@ -18,3 +18,6 @@ application.register("tweet-card", TweetCardController)
 
 import TweetFormController from "./tweet_form_controller"
 application.register("tweet-form", TweetFormController)
+
+import TweetPollingController from "./tweet_polling_controller"
+application.register("tweet-polling", TweetPollingController)
