@@ -12,8 +12,6 @@ export default class extends Controller {
           fetch(`/dashboard?page=${this.element.dataset.nextPage}`, { headers: this.headers })
             .then(response => response.text())
             .then(html => Turbo.renderStreamMessage(html));
-
-          this.disconnect();
         }
       }
     });
