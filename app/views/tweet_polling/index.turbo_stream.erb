@@ -1,0 +1,5 @@
+<% if @tweet_activities.present? %>
+	<%= turbo_stream.prepend "tweets" do %>
+		<%= render partial: "dashboard/tweets", locals: { tweet_activities_data: @tweet_activities_data } %>
+	<% end %>
+<% end %>

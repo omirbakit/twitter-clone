@@ -8,7 +8,7 @@ class TweetPresenter
     @tweet_activity = tweet_activity
   end
 
-  delegate :user, :body, :likes_count, :retweets_count, :views_count, :reply_tweets_count, to: :tweet
+  delegate :id, :user, :body, :likes_count, :retweets_count, :views_count, :reply_tweets_count, to: :tweet
   delegate :display_name, :username, to: :user
 
   attr_reader :tweet, :current_user, :tweet_activity

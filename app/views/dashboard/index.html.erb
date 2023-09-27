@@ -2,6 +2,7 @@
   class="col-7"
   id="dashboard-tweets"
   data-controller="dashboard-tweets tweet-polling"
+  data-latest-tweet-id="<%= @tweet_activities_data[:tweet_activities].first&.id %>"
   data-next-page="<%= @tweet_activities_data[:next_page] %>"
   data-last-page="<%= @tweet_activities_data[:last_page] %>"  
 >
